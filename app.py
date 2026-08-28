@@ -43,11 +43,11 @@ def edit_employee(cur, conn, employee_id, column, new_value):
 def remove_employee(cur, conn, employee_id):
     run_query(cur, conn, f'DELETE FROM employees WHERE employee_id = %s', (employee_id,))
 
-def add_attendance(cur, conn,employee_id, login_date, time_in, time_out, status):
+def add_attendance(cur, conn,employee_id, login_date, time_in, time_out, duration, status):
     run_query(cur, conn, '''INSERT INTO attendance
-        (employee_id, login_date, time_in, time_out, status)
-        VALUES (%s, %s, %s, %s, %s)''',
-        ( employee_id, login_date, time_in, time_out, status)
+        (employee_id, login_date, time_in, time_out, duration, status)
+        VALUES (%s, %s, %s, %s, %s, %s)''',
+        ( employee_id, login_date, time_in, time_out, duration, status)
     )
     print('Row Inserted')
 
@@ -120,7 +120,7 @@ def mark_attendance(cur, conn):
         matched_employee_id = employees[match_index][0]
         matched_name = names[match_index]
         print(f'Recognized: {matched_name}')
-        add_attendance(cur, conn, matched_employee_id, login_date, time_in, None, None)
+        add_attendance(cur, conn, matched_employee_id, login_date, time_in, None, None, None)
     else:
         print('Face not recognized')    
 
@@ -128,6 +128,8 @@ encoding = register_face()
 if encoding is None:
     print('No face detected, registeration failed')
 else:
-    add_employee(cur, conn, 'chill', 'dude', 'IT', 'Tester', encoding)
+    add_employee(cur, conn, 'unfair', 'mate', 'HR', 'Interviewer', encoding)
     print('Employee Registered!')
     mark_attendance(cur, conn)
+
+#venv\Scripts\activate
