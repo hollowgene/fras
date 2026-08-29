@@ -123,7 +123,7 @@ class FindEmployeeDialog(BaseDialog):
                   table.setItem(i, j, QTableWidgetItem(str(value)))
         table.resizeColumnsToContents()
 
-class MarkAttendanceDialog(BaseDialog):
+class MarkAttendanceDialog(BaseDialog): 
     def __init__(self,cur, conn):
         super().__init__("Mark Attendance")
         self.cur = cur
@@ -169,6 +169,7 @@ class EditEmployeeDialog(BaseDialog):
 
         self.column_choice = QComboBox()
         self.column_choice.addItems(['fname', 'lname',' department',' job_title',' face_encoding'])
+        self.column_choice.currentTextChanged.connect(self.toggle_input)
         self.layout.addWidget(self.column_choice)
 
         self.layout.addWidget(QLabel('New Value'))
@@ -180,6 +181,12 @@ class EditEmployeeDialog(BaseDialog):
         self.layout.addWidget(btn_save)
         btn_save.setDefault(False)
         btn_save.setAutoDefault(False)
+
+    def toggle_input(self, text):
+         if text == 'face_encoding':
+              self.new_value.hide()
+         else:
+              self.new_value.show()
 
     def handle_save(self):
         employee_id = self.employee_id.text()

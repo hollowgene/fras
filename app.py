@@ -124,12 +124,12 @@ def mark_attendance(cur, conn):
     else:
         print('Face not recognized')    
 
-encoding = register_face()
-if encoding is None:
-    print('No face detected, registeration failed')
-else:
-    add_employee(cur, conn, 'unfair', 'mate', 'HR', 'Interviewer', encoding)
-    print('Employee Registered!')
-    mark_attendance(cur, conn)
+# encoding = register_face()
+# if encoding is None:
+#     print('No face detected, registeration failed')
+# else:
+#     add_employee(cur, conn, 'unfair', 'mate', 'HR', 'Interviewer', encoding)
+#     print('Employee Registered!')
+#     mark_attendance(cur, conn)
 
 #venv\Scripts\activate
